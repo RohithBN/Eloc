@@ -133,7 +133,7 @@ export default function Home() {
       <div className="max-w-2xl w-full z-10">
         <div className="text-center mb-16 animate-fadeIn">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-sm">
-            Master your pitch.
+            Eloc
           </h1>
           <p className="text-zinc-400 text-lg">Elevate your presentation skills with guided practice.</p>
         </div>
