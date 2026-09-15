@@ -6,20 +6,10 @@ import Timer from '@/components/Timer'
 import AudioRecorder from '@/components/AudioRecorder'
 import Settings from '@/components/Settings'
 
-type Stage = 'topic' | 'prep' | 'speaking' | 'review'
+// Import our massive list of curated topics!
+import { DEEP_TOPICS } from '@/lib/topics' 
 
-const DEEP_TOPICS = [
-  "The paradox of choice: Does having endless options paralyze our ability to be happy?",
-  "If human lifespans were doubled to 160 years, how would society and relationships fundamentally change?",
-  "The morality of artificial intelligence: Should machines be programmed to make ethical decisions?",
-  "Is absolute privacy a fundamental human right, or a modern illusion in the digital age?",
-  "The attention economy: How the commodification of our focus is altering human cognition.",
-  "Should humanity prioritize colonizing other planets, or focus entirely on preserving Earth?",
-  "Intelligence vs. Wisdom: Why technological advancement doesn't always equal human progress.",
-  "The death of boredom: What do we lose when we are constantly stimulated and entertained?",
-  "Is the pursuit of happiness a flawed goal? Should we seek meaning and responsibility instead?",
-  "The impact of instantaneous global communication on deep, meaningful human connections."
-]
+type Stage = 'topic' | 'prep' | 'speaking' | 'review'
 
 export default function Home() {
   const [stage, setStage] = useState<Stage>('topic')
@@ -34,7 +24,7 @@ export default function Home() {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null)
   const [recordingTime, setRecordingTime] = useState(0)
 
-  // BUG FIX: Stable interval hooks that don't reset themselves every second
+  // Prep Timer Hook
   useEffect(() => {
     if (!isPrepRunning) return
     const interval = setInterval(() => {
@@ -43,6 +33,7 @@ export default function Home() {
     return () => clearInterval(interval)
   }, [isPrepRunning])
 
+  // Speaking Timer Hook
   useEffect(() => {
     if (!isSpeakRunning) return
     const interval = setInterval(() => {
@@ -199,7 +190,7 @@ export default function Home() {
               seconds={speakSeconds}
               isRunning={isSpeakRunning}
               onStart={() => setIsSpeakRunning(true)}
-              onStop={handleFinishSpeaking} // Swapped simple pause for explicit Finish Early
+              onStop={handleFinishSpeaking} 
               onReset={() => {
                 setSpeakSeconds(speakTime)
                 setRecordingTime(0)
